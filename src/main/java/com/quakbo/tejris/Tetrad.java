@@ -1,5 +1,6 @@
 package com.quakbo.tejris;
 
+import com.quakbo.tejris.gamestates.GameplayState;
 import java.awt.Point;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SpriteSheet;
@@ -36,10 +37,10 @@ public class Tetrad
      * An integer representing the shape of this tetrad.  This corresponds with 
      * the constants in the Tetrad class.
      */
-    int shape;
+    private int shape;
 
     /** An integer indicating the current orientation. */
-    int orientation;
+    private int orientation;
 
     /**
      * Creates a new Tetrad with the specified shape and orientation.
@@ -50,7 +51,7 @@ public class Tetrad
      * @param orientation the orientation as specified in the Game Components section.
      * @param sprites the SpriteSheet to use for the block images.
      */
-    Tetrad( int row, int col, int shape, int orientation, SpriteSheet sprites )
+    public Tetrad( int row, int col, int shape, int orientation, SpriteSheet sprites )
     {
         blocks = new Block[4];
         coords = new Point[4];
@@ -256,7 +257,7 @@ public class Tetrad
         }
         else
         {
-            gps.tetradLanded = true;
+            gps.setTetradLanded(true);
         }
     }
     
@@ -268,7 +269,7 @@ public class Tetrad
      */
     public void hardDrop( PlayField pf, GameplayState gps )
     {
-        while ( ! gps.tetradLanded )
+        while (!gps.isTetradLanded())
         {
             this.softDrop(pf,gps);
         }
@@ -550,5 +551,13 @@ public class Tetrad
                 break;
             default: break;
         }
+    }
+
+    public int getShape() {
+        return shape;
+    }
+
+    public int getOrientation() {
+        return orientation;
     }
 }

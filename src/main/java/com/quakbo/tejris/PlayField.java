@@ -1,5 +1,6 @@
 package com.quakbo.tejris;
 
+import com.quakbo.tejris.gamestates.GameplayState;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
@@ -47,7 +48,7 @@ public class PlayField
     {
         if ( row < 4 )
         {
-            gps.gameIsLost = true;
+            gps.setGameIsLost(true);
         }
         
         cells[row][col] = block;
@@ -68,7 +69,7 @@ public class PlayField
         {
             int x = gps.rand.nextInt(sprites.getHorizontalCount());
             int y = gps.rand.nextInt(sprites.getVerticalCount());
-            
+
             if ( col != missingColumn )
             {
                 addBlock( row, col, new Block( sprites.getSprite(x, y) ), gps );

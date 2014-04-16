@@ -1,0 +1,27 @@
+Game Design and Code
+Quincy Bowers
+
+Graphics Artist
+James Harris
+
+Music and Sound Effects
+Spencer Bowers
+
+Testers
+Kimberly Bowers
+
+Tejris was created with the following tools:
+Java - http://www.java.com/en/
+Eclipse - http://www.eclipse.org
+Slick - http://slick.cokeandcode.com/
+LWJGL - http://www.lwjgl.org/
+Subversion - http://subversion.tigris.org/
+
+Thanks to
+Everyone who supported us.
+
+Tejris is distributed under the terms of the GNU Public License.
+Please read the file license.txt in the Tejris directory for
+details regarding your rights.
+
+Copyright 2010 [[Name of Studio]].

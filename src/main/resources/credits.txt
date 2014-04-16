@@ -2,7 +2,7 @@ Game Design and Code
 Quincy Bowers
 
 Graphics Artist
-James Harris
+Jeremy Dennis
 
 Music and Sound Effects
 Spencer Bowers
@@ -24,4 +24,4 @@ Tejris is distributed under the terms of the GNU Public License.
 Please read the file license.txt in the Tejris directory for
 details regarding your rights.
 
-Copyright 2010 [[Name of Studio]].
+

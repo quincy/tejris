@@ -102,7 +102,7 @@ public class GameplayState extends BasicGameState {
         score             = 0;
         pointsMultiplier  = 1;
         pointsToAward     = 0;
-        level             = ((Tejris) sbg).NewGameLevel;
+        level             = ((Tejris) sbg).getNewGameLevel();
         totalLinesCleared = 0;
         gameIsLost        = false;
         tetradLanded      = false;
@@ -135,10 +135,10 @@ public class GameplayState extends BasicGameState {
         scoreFont.loadGlyphs();
 
         // Fill in incomplete lines up to the starting line height
-        if (((Tejris) sbg).NewGameLineHeight > 0) {
+        if (((Tejris) sbg).getNewGameLineHeight() > 0) {
             int randomColumn = rand.nextInt(10);
 
-            for (int row = 23; row > 23-((Tejris) sbg).NewGameLineHeight; row--) {
+            for (int row = 23; row > 23-((Tejris) sbg).getNewGameLineHeight(); row--) {
                 pf.addPartialLine(row, randomColumn, sprites, this);
             }
         }

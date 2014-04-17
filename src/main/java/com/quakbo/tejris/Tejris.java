@@ -10,6 +10,7 @@ import com.quakbo.tejris.gamestates.CreditsState;
 import com.quakbo.tejris.gamestates.GameState;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.newdawn.slick.AppGameContainer;
@@ -23,25 +24,37 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
 
+/**
+ * Tejris sets up the various states that make up the game and starts game at
+ * the main menu.
+ */
 public class Tejris extends StateBasedGame {
-    public static final int GAME_WIDTH         = 800;
-    public static final int GAME_HEIGHT        = 600;
-
+    /** The width of the GUI window. */
+    public static final int GAME_WIDTH = 800;
+    /** The height of the GUI window. */
+    public static final int GAME_HEIGHT = 600;
+    /** The path to the high scores file. */
     public static final String HIGH_SCORES_FILE = "TejrisHighScores";
-
-    public static ArrayList<HighScore> highScores;
+    /** The number of high scores that will be kept. */
+    private static final int MAX_NUM_SCORES = 10;
+    /** The list of high scores. */
+    public static List<HighScore> highScores;
+    /** The high scores file. */
     public static SavedState highScoresFile;
 
-    public int NewGameLineHeight;
-    public int NewGameLevel;
-    public boolean configSoundOn;
-    public boolean configMusicOn;
+    private int newGameLineHeight;
+    private int newGameLevel;
+    private boolean configSoundOn;
+    private boolean configMusicOn;
 
+    /**
+     * Creates the instance of the Tejris StateBasedGame.
+     */
     public Tejris() {
         super("Tejris");
 
-        NewGameLineHeight = 0;
-        NewGameLevel      = 0;
+        newGameLineHeight = 0;
+        newGameLevel      = 0;
 
         this.addState(new MainMenuState(GameState.MAIN_MENU_STATE));
         this.addState(new GameplayState(GameState.GAMEPLAY_STATE));
@@ -50,10 +63,18 @@ public class Tejris extends StateBasedGame {
         this.addState(new GameConfigState(GameState.GAME_CONFIG_STATE));
         this.addState(new GameOverState(GameState.GAME_OVER_STATE));
 
-        this.enterState(GameState.MAIN_MENU_STATE.getId(), new FadeInTransition(Color.black), new EmptyTransition());
+        this.enterState(
+                GameState.MAIN_MENU_STATE.getId(),
+                new FadeInTransition(Color.black),
+                new EmptyTransition());
     }
 
-    public static void main(String[] args) throws SlickException {
+    /**
+     * The main method for the game.
+     * @param args the command line arguments to the program.
+     * @throws SlickException if the game engine has a problem.
+     */
+    public static void main(final String[] args) throws SlickException {
         // create the high score list
         highScores = new ArrayList<HighScore>();
         highScoresFile = new SavedState(HIGH_SCORES_FILE);
@@ -61,12 +82,13 @@ public class Tejris extends StateBasedGame {
         readHighScoresFile();
 
         // create the game container and start the game.
-        AppGameContainer app = new AppGameContainer(new Tejris());
+        final AppGameContainer app = new AppGameContainer(new Tejris());
+        final int updateInterval = 20; // ms
 
         app.setShowFPS(true);
         app.setVerbose(true);
-        app.setMinimumLogicUpdateInterval(20);
-        app.setMaximumLogicUpdateInterval(20);
+        app.setMinimumLogicUpdateInterval(updateInterval);
+        app.setMaximumLogicUpdateInterval(updateInterval);
         app.setDisplayMode(GAME_WIDTH, GAME_HEIGHT, false);
         app.start();
     }
@@ -99,39 +121,93 @@ public class Tejris extends StateBasedGame {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < 10; i++) {
-            highScores.add(i, new HighScore((int)highScoresFile.getNumber("score" + i, 0),
-                                                 highScoresFile.getString("name" + i, "nobody")));
+        for (int i = 0; i < MAX_NUM_SCORES; i++) {
+            highScores.add(i,
+                    new HighScore((int) highScoresFile.getNumber("score" + i, 0),
+                            highScoresFile.getString("name" + i, "nobody")));
         }
     }
 
     @Override
-    public void initStatesList(GameContainer gameContainer) throws SlickException {
+    public void initStatesList(final GameContainer gameContainer) throws SlickException {
         parseConfig(gameContainer);
     }
 
     /**
      * Read in the config file and change basic properties of the game.
      *
-     * @param gc the GameContainer object.
+     * @param gameContainer the GameContainer object.
      */
-    public void parseConfig(GameContainer gc) {
-        Scanner s = new Scanner(ResourceLoader.getResourceAsStream("tejris.cfg"));
-        s.useDelimiter(System.getProperty("line.separator"));
+    public final void parseConfig(final GameContainer gameContainer) {
+        final Scanner scanner = new Scanner(ResourceLoader.getResourceAsStream("tejris.cfg"));
+        scanner.useDelimiter(System.getProperty("line.separator"));
 
-        while (s.hasNext()) {
-            String line = s.nextLine();
+        while (scanner.hasNext()) {
+            final String line = scanner.nextLine();
 
-            if (line.equals("NO_SOUND")) {
+            if ("NO_SOUND".equals(line)) {
                 Log.info("Sound disabled.");
                 configSoundOn = false;
-            } else if (line.equals("NO_MUSIC")) {
+            } else if ("NO_MUSIC".equals(line)) {
                 Log.info("Music disabled");
                 configMusicOn = false;
             }
         }
 
-    	gc.setSoundOn(configSoundOn);
-        gc.setMusicOn(configMusicOn);
+        gameContainer.setSoundOn(configSoundOn);
+        gameContainer.setMusicOn(configMusicOn);
+    }
+
+    /**
+     * @return the line height for new games.
+     */
+    public final int getNewGameLineHeight() {
+        return newGameLineHeight;
+    }
+
+    /**
+     * @return the level for new games.
+     */
+    public final int getNewGameLevel() {
+        return newGameLevel;
+    }
+
+    /**
+     * @return true id sound is on; false otherwise.
+     */
+    public final boolean isConfigSoundOn() {
+        return configSoundOn;
+    }
+
+    /**
+     * Sets the sound on or off.
+     * @param configSoundOn state for the sound.
+     */
+    public final void setConfigSoundOn(final boolean configSoundOn) {
+        this.configSoundOn = configSoundOn;
+    }
+
+    public boolean isConfigMusicOn() {
+        return configMusicOn;
+    }
+
+    public void setConfigMusicOn(boolean configMusicOn) {
+        this.configMusicOn = configMusicOn;
+    }
+
+    public void decrementNewGameLinHeight() {
+        newGameLineHeight--;
+    }
+
+    public void decrementNewGameLevel() {
+        newGameLevel--;
+    }
+
+    public void incrementNewGameLevel() {
+        newGameLevel++;
+    }
+
+    public void incrementNewGameLinHeight() {
+        newGameLineHeight++;
     }
 }

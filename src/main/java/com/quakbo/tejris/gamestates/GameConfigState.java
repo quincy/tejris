@@ -61,7 +61,7 @@ public class GameConfigState extends BasicGameState
         } else {
             uf.drawString(x, y, "Level", inactiveColor);
         }
-        uf.drawString(250, 200, "" + ((Tejris) sbg).NewGameLevel);
+        uf.drawString(250, 200, "" + ((Tejris) sbg).getNewGameLevel());
 
         x = 50;
         y = 250;
@@ -70,7 +70,7 @@ public class GameConfigState extends BasicGameState
         } else {
             uf.drawString(x, y, "Height", inactiveColor);
         }
-        uf.drawString(250, 250, "" + ((Tejris) sbg).NewGameLineHeight);
+        uf.drawString(250, 250, "" + ((Tejris) sbg).getNewGameLineHeight());
 
         String newGameString = "Press ENTER to start game";
         String cancelString  = "Press ESC to cancel";
@@ -123,24 +123,24 @@ public class GameConfigState extends BasicGameState
         // LEFT
         if (input.isKeyPressed(Input.KEY_LEFT)) {
             if (activeItem == 0) {
-                if (((Tejris) sbg).NewGameLevel > 1) {
-                    ((Tejris) sbg).NewGameLevel--;
+                if (((Tejris) sbg).getNewGameLevel() > 1) {
+                    ((Tejris) sbg).decrementNewGameLevel();
                 }
             } else {
-                if (((Tejris) sbg).NewGameLineHeight > 0) {
-                    ((Tejris) sbg).NewGameLineHeight--;
+                if (((Tejris) sbg).getNewGameLineHeight() > 0) {
+                    ((Tejris) sbg).decrementNewGameLinHeight();
                 }
             }
         }
         // RIGHT
         if (input.isKeyPressed(Input.KEY_RIGHT)) {
             if (activeItem == 0) {
-                if (((Tejris) sbg).NewGameLevel < 20) {
-                    ((Tejris) sbg).NewGameLevel++;
+                if (((Tejris) sbg).getNewGameLevel() < 20) {
+                    ((Tejris) sbg).incrementNewGameLevel();
                 }
             } else {
-                if (((Tejris) sbg).NewGameLineHeight < 15) {
-                    ((Tejris) sbg).NewGameLineHeight++;
+                if (((Tejris) sbg).getNewGameLineHeight() < 15) {
+                    ((Tejris) sbg).incrementNewGameLinHeight();
                 }
             }
         }

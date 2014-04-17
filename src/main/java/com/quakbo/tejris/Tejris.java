@@ -24,13 +24,6 @@ import org.newdawn.slick.util.Log;
 import org.newdawn.slick.util.ResourceLoader;
 
 public class Tejris extends StateBasedGame {
-    public static final int MAIN_MENU_STATE    = 0;
-    public static final int GAMEPLAY_STATE     = 1;
-    public static final int INSTRUCTIONS_STATE = 2;
-    public static final int CREDITS_STATE      = 3;
-    public static final int GAME_CONFIG_STATE  = 4;
-    public static final int GAME_OVER_STATE    = 5;
-
     public static final int GAME_WIDTH         = 800;
     public static final int GAME_HEIGHT        = 600;
 

@@ -1,4 +1,4 @@
-package com.quakbo.tejris;
+package com.quakbo.tejris.score;
 
 import java.io.Serializable;
 

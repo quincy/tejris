@@ -1,9 +1,9 @@
 package com.quakbo.tejris.gamestates;
 
-import com.quakbo.tejris.HighScore;
-import com.quakbo.tejris.PlayField;
+import com.quakbo.tejris.score.HighScore;
+import com.quakbo.tejris.board.PlayField;
 import com.quakbo.tejris.Tejris;
-import com.quakbo.tejris.Tetrad;
+import com.quakbo.tejris.pieces.Tetrad;
 import com.quakbo.tejris.gamestates.GameState;
 import java.util.ArrayList;
 import java.util.Random;

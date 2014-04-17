@@ -1,5 +1,6 @@
 package com.quakbo.tejris;
 
+import com.quakbo.tejris.score.HighScore;
 import com.quakbo.tejris.gamestates.GameplayState;
 import com.quakbo.tejris.gamestates.InstructionsState;
 import com.quakbo.tejris.gamestates.MainMenuState;

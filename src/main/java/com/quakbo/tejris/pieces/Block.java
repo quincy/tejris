@@ -1,4 +1,4 @@
-package com.quakbo.tejris;
+package com.quakbo.tejris.pieces;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -11,7 +11,7 @@ public class Block {
      *
      * @param sprites the Slick SpriteSheet object which holds all of the block images.
      */
-    Block(Image sprite) {
+    public Block(Image sprite) {
         this.sprite = sprite;
     }
 

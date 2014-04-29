@@ -40,7 +40,7 @@ public class GameplayState extends BasicGameState {
     private static final int POINTS_TRIPLE    = 500;
     private static final int POINTS_TEJRIS    = 1000;
     private static final int POINTS_SOFT_DROP = 10;
-    //private static final int POINTS_HARD_DROP = 10;
+    private static final int POINTS_HARD_DROP = 10;
 
     /* Input timing */
     private static final int KEY_REPEAT_DELAY       = 200;
@@ -469,12 +469,12 @@ public class GameplayState extends BasicGameState {
             currTetrad.softDrop(pf, this);
         }
 
-        /*// HARD DROP
+        // HARD DROP
         if ( input.isKeyPressed(Input.KEY_SPACE) )
         {
-            pointsToAward += POINTS_HARD_DROP * ( 24 - currTetrad.coords[0].x );
+            pointsToAward += POINTS_HARD_DROP * ( 24 - currTetrad.getCoords()[0].x );
             currTetrad.hardDrop(pf, this);
-        }*/
+        }
 
         // ROTATE LEFT
         if (input.isKeyDown(Input.KEY_X) && timeSinceKeyRepeat > KEY_REPEAT_DELAY) {
